@@ -8,6 +8,7 @@ namespace Assets.Location
         private const double MAP_HEIGHT_IN_METERS = 294.121;
         private const int MAP_WIDTH_IN_PIXELS = 450;
         private const int MAP_HEIGHT_IN_PIXELS = 800;
+        private const double LATITUDE_DEGREE_LENGTH = 111319.491;
 
         private double CalculateCosinus(double value)
         {
@@ -24,7 +25,14 @@ namespace Assets.Location
             return Math.Log10(212896.0f * CalculateCosinus(latitude)) / 0.30103f;
         }
 
-        //1 degree of latitude is equal to 111.32 km
-        //1 degree of longitude is equal to about 111.319491 * cos(latitude) km
+        public double CalculateHorizontalDistance(float playerLatitude, float resourceLatitude)
+        {
+            return (resourceLatitude - playerLatitude) * LATITUDE_DEGREE_LENGTH;
+        }
+
+        public double CalculateVerticalDistance(float playerLatitude, float playerLongitude, float resourceLongitude)
+        {
+            return (resourceLongitude - playerLongitude) * LATITUDE_DEGREE_LENGTH * CalculateCosinus(playerLatitude);
+        }
     }
 }
