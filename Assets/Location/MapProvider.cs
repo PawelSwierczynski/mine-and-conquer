@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 namespace Assets.Location
 {
-    public class MapboxTextureProvider : MonoBehaviour
+    public class MapProvider : MonoBehaviour
     {
         private const string API_URL_BEGINNING = "https://api.mapbox.com/styles/v1/kagalorn/ckc2bflbx6sju1is2s6m3t768/static/";
         private const string API_URL_ROTATION = ",0/";
@@ -14,6 +14,7 @@ namespace Assets.Location
 
         public RawImage gpsMapRawImage;
         public GPS gps;
+        public ResourceLocationProvider resourceLocationProvider;
 
         private MapCalculator mapCalculator;
         private CultureInfo apiCulture;
@@ -29,6 +30,7 @@ namespace Assets.Location
             if (gps.IsLocationChanged())
             {
                 StartCoroutine(RetrieveTextureFromAPI(gps.Longitude, gps.Latitude));
+                resourceLocationProvider.RequestResourceLocations(gps.Longitude, gps.Latitude);
             }
         }
 

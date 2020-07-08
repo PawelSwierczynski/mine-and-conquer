@@ -9,6 +9,8 @@ namespace Assets.Location
         private const int MAP_WIDTH_IN_PIXELS = 450;
         private const int MAP_HEIGHT_IN_PIXELS = 800;
         private const double LATITUDE_DEGREE_LENGTH = 111319.491;
+        private const double MAP_HORIZONTAL_BOUND_DISTANCE = 0.001321;
+        private const double MAP_VERTICAL_BOUND_DISTANCE_MODIFIER = 82.7215;
 
         private double CalculateCosinus(double value)
         {
@@ -33,6 +35,16 @@ namespace Assets.Location
         public double CalculateVerticalDistance(float playerLatitude, float playerLongitude, float resourceLongitude)
         {
             return (resourceLongitude - playerLongitude) * LATITUDE_DEGREE_LENGTH * CalculateCosinus(playerLatitude);
+        }
+
+        public double CalculateHorizontalBoundDistance()
+        {
+            return MAP_HORIZONTAL_BOUND_DISTANCE;
+        }
+
+        public double CalculateVerticalBoundDistance(float playerLatitude)
+        {
+            return MAP_VERTICAL_BOUND_DISTANCE_MODIFIER / (LATITUDE_DEGREE_LENGTH * CalculateCosinus(playerLatitude));
         }
     }
 }
