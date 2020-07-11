@@ -6,6 +6,7 @@ namespace Assets.Location
     public class ResourceLocation
     {
         public int Identifier;
+        public int TypeIdentifier;
         public double Latitude;
         public double Longitude;
     }

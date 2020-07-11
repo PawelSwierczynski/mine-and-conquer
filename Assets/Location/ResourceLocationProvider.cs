@@ -70,7 +70,7 @@ namespace Assets.Location
 
             foreach (var resourceInLineOfSight in resourcesInLineOfSight)
             {
-                resourceSpawnParameters.Add(new ResourceSpawnParameters(resourceInLineOfSight.Identifier, 0, mapBounds.CalculateResourcePosition(resourceInLineOfSight)));
+                resourceSpawnParameters.Add(new ResourceSpawnParameters(resourceInLineOfSight.Identifier, resourceInLineOfSight.TypeIdentifier, mapBounds.CalculateResourcePosition(resourceInLineOfSight)));
             }
 
             resourceSpawner.SpawnResources(resourceSpawnParameters);
