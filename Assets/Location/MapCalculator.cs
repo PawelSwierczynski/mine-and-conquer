@@ -46,5 +46,15 @@ namespace Assets.Location
         {
             return MAP_VERTICAL_BOUND_DISTANCE_MODIFIER / (LATITUDE_DEGREE_LENGTH * CalculateCosinus(playerLatitude));
         }
+
+        public double RetrieveLatitudeZoneIdentifier(float latitude)
+        {
+            return Math.Floor(latitude / 0.05 + 1800);
+        }
+
+        public double RetrieveLongitudeZoneIdentifier(float longitude)
+        {
+            return Math.Floor(longitude / 0.05 + 3600);
+        }
     }
 }

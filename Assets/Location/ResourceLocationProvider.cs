@@ -13,17 +13,19 @@ namespace Assets.Location
         public ResourceSpawner resourceSpawner;
 
         private ResourceLocationHolder resourceLocationHolder;
+        private MapCalculator mapCalculator;
         private float currentPlayerLongitude;
         private float currentPlayerLatitude;
 
         void Start()
         {
             resourceLocationHolder = new ResourceLocationHolder();
+            mapCalculator = new MapCalculator();
         }
 
-        private IEnumerator RetrieveResourceLocations()
+        private IEnumerator RetrieveResourceLocations(float playerLatitude, float playerLongitude)
         {
-            UnityWebRequest resourceLocationsRequest = UnityWebRequest.Get(RESOURCE_LOCATIONS_URI);
+            UnityWebRequest resourceLocationsRequest = UnityWebRequest.Get(RESOURCE_LOCATIONS_URI + "?latitude=" + mapCalculator.RetrieveLatitudeZoneIdentifier(playerLatitude) + "&longitude=" + mapCalculator.RetrieveLongitudeZoneIdentifier(playerLongitude));
             yield return resourceLocationsRequest.SendWebRequest();
 
             if (resourceLocationsRequest.isNetworkError || resourceLocationsRequest.isHttpError)
@@ -43,7 +45,7 @@ namespace Assets.Location
             currentPlayerLongitude = playerLongitude;
             currentPlayerLatitude = playerLatitude;
 
-            StartCoroutine(RetrieveResourceLocations());
+            StartCoroutine(RetrieveResourceLocations(playerLatitude, playerLongitude));
         }
 
         private IEnumerable<ResourceLocation> RetrieveResourcesInLineOfSight(MapBounds mapBounds)
