@@ -1045,8 +1045,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 252c78fc135f70846888740be0c22e04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  username: {fileID: 0}
-  passowrd: {fileID: 0}
+  UsernameInput: {fileID: 1846490716}
+  PasswordInput: {fileID: 1775852249}
+  LoginButton: {fileID: 1027097658}
 --- !u!1 &1775852247
 GameObject:
   m_ObjectHideFlags: 0
