@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.Networking;
 
@@ -30,7 +31,11 @@ public class Login : MonoBehaviour
             }
             else
             {
-                Debug.Log(www.downloadHandler.text);
+                if (www.downloadHandler.text == "{\"Login\":\"successful\"}")
+                {
+                    SceneManager.LoadScene("Game");
+                }
+                
             }
         }
     }
