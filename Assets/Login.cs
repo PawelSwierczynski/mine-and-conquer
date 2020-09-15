@@ -31,7 +31,7 @@ public class Login : MonoBehaviour
             }
             else
             {
-                if (www.downloadHandler.text == "{\"Login\":\"successful\"}")
+                if (www.downloadHandler.text.Contains("successful"))
                 {
                     SceneManager.LoadScene("Game");
                 }
