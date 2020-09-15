@@ -9,10 +9,12 @@ public class Login : MonoBehaviour
     public InputField UsernameInput;
     public InputField PasswordInput;
     public Button LoginButton;
+    public Button RegisterButton;
 
     void Start()
     {
         LoginButton.onClick.AddListener(LoginRequest);
+        RegisterButton.onClick.AddListener(RegisterRequest);
     }
     public class User
     {
@@ -49,5 +51,9 @@ public class Login : MonoBehaviour
     public void LoginRequest()
     {
         StartCoroutine(LoginRequestSend());
+    }
+    public void RegisterRequest()
+    {
+        SceneManager.LoadScene("Register");
     }
 }
