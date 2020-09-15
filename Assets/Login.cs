@@ -14,7 +14,11 @@ public class Login : MonoBehaviour
     {
         LoginButton.onClick.AddListener(LoginRequest);
     }
-
+    public class User
+    {
+        public string Login;
+        public int Token;
+    }
     IEnumerator LoginRequestSend()
     {
         WWWForm form = new WWWForm();
@@ -31,7 +35,9 @@ public class Login : MonoBehaviour
             }
             else
             {
-                if (www.downloadHandler.text.Contains("successful"))
+                User user = JsonUtility.FromJson<User>(www.downloadHandler.text);
+                GameManager.Instance.Token = user.Token;
+                if (user.Login == "successful")
                 {
                     SceneManager.LoadScene("Game");
                 }
