@@ -16,11 +16,13 @@ public class Login : MonoBehaviour
         LoginButton.onClick.AddListener(LoginRequest);
         RegisterButton.onClick.AddListener(RegisterRequest);
     }
+
     public class User
     {
         public string Login;
         public int Token;
     }
+
     IEnumerator LoginRequestSend()
     {
         WWWForm form = new WWWForm();
@@ -52,6 +54,7 @@ public class Login : MonoBehaviour
     {
         StartCoroutine(LoginRequestSend());
     }
+
     public void RegisterRequest()
     {
         SceneManager.LoadScene("Register");

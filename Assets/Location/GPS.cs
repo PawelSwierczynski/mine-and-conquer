@@ -31,8 +31,9 @@ namespace Assets.Location
         {
             isRunning = false;
             isLocationChanged = false;
-            Longitude = 0.0f;
-            Latitude = 0.0f;
+
+            Latitude = 52.38f;
+            Longitude = 16.88f;
 
             StartCoroutine(EnableLocationRetrieval());
         }
@@ -49,6 +50,8 @@ namespace Assets.Location
         {
             if (!Input.location.isEnabledByUser)
             {
+                isLocationChanged = true;
+
                 yield break;
             }
 

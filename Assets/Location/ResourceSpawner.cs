@@ -20,9 +20,25 @@ namespace Assets.Location
             }
         }
 
+        private bool IsResourceInstantiated(int identifier)
+        {
+            foreach (Transform element in ui.transform)
+            {
+                if (element.name == identifier.ToString())
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
         private void SpawnResource(ResourceSpawnParameters resourceSpawnParameters)
         {
-            Instantiate(resources[resourceSpawnParameters.Type], new Vector3(resourceSpawnParameters.MapCoordinates.x, resourceSpawnParameters.MapCoordinates.y), ui.transform.rotation, ui.transform);
+            if (!IsResourceInstantiated(resourceSpawnParameters.Identifier))
+            {
+                Instantiate(resources[resourceSpawnParameters.Type], new Vector3(resourceSpawnParameters.MapCoordinates.x, resourceSpawnParameters.MapCoordinates.y), ui.transform.rotation, ui.transform).name = resourceSpawnParameters.Identifier.ToString();
+            }
         }
 
         public void SpawnResources(IEnumerable<ResourceSpawnParameters> resourceSpawnParameters)
