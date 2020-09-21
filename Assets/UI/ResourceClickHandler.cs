@@ -7,6 +7,13 @@ namespace Assets.UI
     public class ResourceClickHandler : MonoBehaviour
     {
         public int ResourceType;
+        
+        private ResourceCountUpdater resourceCountUpdater;
+
+        private void Start()
+        {
+            resourceCountUpdater = FindObjectOfType<ResourceCountUpdater>();
+        }
 
         private IEnumerator ClaimResource()
         {
@@ -24,7 +31,7 @@ namespace Assets.UI
                 }
                 else
                 {
-                    Debug.Log(unityWebRequest.downloadHandler.text);
+                    resourceCountUpdater.UpdateCounts(unityWebRequest.downloadHandler.text);
 
                     Destroy(transform.gameObject);
                 }
