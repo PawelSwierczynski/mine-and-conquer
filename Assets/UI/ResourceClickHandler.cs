@@ -24,10 +24,7 @@ namespace Assets.UI
                 }
                 else
                 {
-                    if (unityWebRequest.downloadHandler.text == "claimed")
-                    {
-                        //update resources count
-                    }
+                    Debug.Log(unityWebRequest.downloadHandler.text);
 
                     Destroy(transform.gameObject);
                 }
