@@ -1,14 +1,15 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 namespace Assets.Location
 {
     public class ResourceSpawner : MonoBehaviour
     {
-        public Canvas ui;
+        public Canvas ui;        
         public Button[] resources;
-
+        
         private void ClearResources()
         {
             foreach (Transform element in ui.transform)
@@ -50,5 +51,6 @@ namespace Assets.Location
                 SpawnResource(resource);
             }
         }
+        
     }
 }

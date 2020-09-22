@@ -17,7 +17,8 @@ public class Village
 }
 public class Buildings : MonoBehaviour
 {
-    public Button LumberjackButton;
+    public Button MapButton;
+    public Button LumberjackButton;    
     public Button StonequarryButton;
     public Button GoldmineButton;
     public Text LumberjackLevel;
@@ -27,6 +28,7 @@ public class Buildings : MonoBehaviour
 
     void Start()
     {
+        MapButton.onClick.AddListener(OpenMap);
         LumberjackButton.onClick.AddListener(Lumberjack);
         StonequarryButton.onClick.AddListener(Stonequarry);
         GoldmineButton.onClick.AddListener(Goldmine);
@@ -38,8 +40,7 @@ public class Buildings : MonoBehaviour
     IEnumerator VillageRequestSend()
     {
         WWWForm form = new WWWForm();
-        form.AddField("Token", 17);
-        //GameManager.Instance.Token
+        form.AddField("Token", GameManager.Instance.Token);
         using (UnityWebRequest www = UnityWebRequest.Post("https://rest-api-nodejs-mysql-server.herokuapp.com/Villages", form))
         {
             yield return www.SendWebRequest();
@@ -50,13 +51,14 @@ public class Buildings : MonoBehaviour
             }
             else
             {            
-                Debug.Log(www.downloadHandler.text);
-                Village village = JsonUtility.FromJson<Village>(www.downloadHandler.text);
-
-                Debug.Log(village.Lumberjack);
+                Village village = JsonUtility.FromJson<Village>(www.downloadHandler.text.Trim(new char[] {'[',']' }));
                 LumberjackLevel.text = village.Lumberjack.ToString();
-                StonequarryLevel.text = village.Stonequarry.ToString(); ;
-                GoldmineLevel.text = village.Goldmine.ToString(); ;
+                StonequarryLevel.text = village.Stonequarry.ToString();
+                GoldmineLevel.text = village.Goldmine.ToString();
+                GameManager.Instance.LumberjackLevel = village.Lumberjack;
+                GameManager.Instance.StonequarryLevel = village.Stonequarry;
+                GameManager.Instance.GoldmineLevel = village.Goldmine;
+
 }
         }
     }
@@ -69,6 +71,10 @@ public class Buildings : MonoBehaviour
     void Update()
     {
         
+    }
+    public void OpenMap()
+    {
+        SceneManager.LoadScene("Game");
     }
     public void Lumberjack()
     {

@@ -728,6 +728,9 @@ MonoBehaviour:
   CurrentProduction: {fileID: 269583173}
   NextLevel: {fileID: 374951048}
   NextProduction: {fileID: 514745508}
+  RequiredWood: {fileID: 1922724382}
+  RequiredStone: {fileID: 997256020}
+  RequiredGold: {fileID: 720741077}
 --- !u!114 &556139953
 MonoBehaviour:
   m_ObjectHideFlags: 0
