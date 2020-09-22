@@ -14,4 +14,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Register.unity
     guid: 940429cfd8d711d4aad81d036abda65c
+  - enabled: 1
+    path: Assets/Scenes/Village.unity
+    guid: 299d5ca19d9ea7b4383fc9af1bed3b8b
+  - enabled: 1
+    path: Assets/Scenes/Lumberjack.unity
+    guid: 8e4c8f51632e37c448729af980e0fe91
   m_configObjects: {}
