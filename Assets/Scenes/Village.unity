@@ -802,6 +802,9 @@ MonoBehaviour:
   LumberjackButton: {fileID: 453047593}
   StonequarryButton: {fileID: 867527439}
   GoldmineButton: {fileID: 1439330277}
+  LumberjackLevel: {fileID: 733378441}
+  StonequarryLevel: {fileID: 400730508}
+  GoldmineLevel: {fileID: 522375140}
 --- !u!1 &867527437
 GameObject:
   m_ObjectHideFlags: 0
@@ -1302,7 +1305,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 9ddfc244d3c61994cac0c2e133461f28, type: 3}
+  m_Sprite: {fileID: 21300000, guid: aa667e50ec8218c42bc32d74cab3286c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
