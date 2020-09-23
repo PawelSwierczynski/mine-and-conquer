@@ -1652,7 +1652,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Current production:'
+  m_Text: 'Defense bonus:'
 --- !u!222 &1204292964
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2074,8 +2074,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -253.2, y: 58}
-  m_SizeDelta: {x: 345.7, y: 61.2}
+  m_AnchoredPosition: {x: -251.7, y: 58}
+  m_SizeDelta: {x: 353.8, y: 61.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1681926457
 MonoBehaviour:
@@ -2108,7 +2108,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Next production:'
+  m_Text: 'Next defense bonus:'
 --- !u!222 &1681926458
 CanvasRenderer:
   m_ObjectHideFlags: 0

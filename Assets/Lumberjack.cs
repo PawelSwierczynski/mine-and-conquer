@@ -37,8 +37,37 @@ public class Lumberjack : MonoBehaviour
         form.AddField("Token", GameManager.Instance.Token);
         form.AddField("Level", GameManager.Instance.LumberjackLevel + 1);
         
+        if(GameManager.Instance.WoodCount >= int.Parse(RequiredWood.text) && GameManager.Instance.StoneCount >= int.Parse(RequiredStone.text) && GameManager.Instance.GoldCount >= int.Parse(RequiredGold.text))
+        {
+            using (UnityWebRequest www = UnityWebRequest.Post("https://rest-api-nodejs-mysql-server.herokuapp.com/Villages/Lumberjack", form))
+            {
+                yield return www.SendWebRequest();
 
-        using (UnityWebRequest www = UnityWebRequest.Post("https://rest-api-nodejs-mysql-server.herokuapp.com/Villages/Lumberjack", form))
+                if (www.isNetworkError || www.isHttpError)
+                {
+                    Debug.Log(www.error);
+                }
+                else
+                {
+                    StartCoroutine(UpdateResources());
+                }
+            }
+            
+        }
+        else
+        {
+            Debug.Log("brak surowcow");
+        }
+    }
+
+    IEnumerator UpdateResources()
+    {
+        WWWForm form2 = new WWWForm();
+        form2.AddField("woodUsed", int.Parse(RequiredWood.text));
+        form2.AddField("stoneUsed", int.Parse(RequiredStone.text));
+        form2.AddField("goldUsed", int.Parse(RequiredGold.text));
+        form2.AddField("userToken", GameManager.Instance.Token);
+        using (UnityWebRequest www = UnityWebRequest.Post("https://rest-api-nodejs-mysql-server.herokuapp.com/api/UserResources/use", form2))
         {
             yield return www.SendWebRequest();
 
@@ -48,11 +77,12 @@ public class Lumberjack : MonoBehaviour
             }
             else
             {
-                Debug.Log("ok");
+                Debug.Log(www.downloadHandler.text);
+                gameObject.GetComponent<ResourceCountUpdater>().UpdateCounts(www.downloadHandler.text);
+                GameManager.Instance.LumberjackLevel += 1;
+                SetLevels();
             }
         }
-        GameManager.Instance.LumberjackLevel += 1;
-        SetLevels();
     }
     public void BackRequest()
     {
