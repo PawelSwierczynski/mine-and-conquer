@@ -45,5 +45,9 @@ public class ResourceCountUpdater : MonoBehaviour
         woodCount.text = resourceCounts.WoodCount.ToString();
         stoneCount.text = resourceCounts.StoneCount.ToString();
         goldCount.text = resourceCounts.GoldCount.ToString();
+
+        GameManager.Instance.WoodCount = resourceCounts.WoodCount;
+        GameManager.Instance.StoneCount = resourceCounts.StoneCount;
+        GameManager.Instance.GoldCount = resourceCounts.GoldCount;
     }
 }

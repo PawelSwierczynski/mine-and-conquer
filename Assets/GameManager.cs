@@ -10,6 +10,9 @@ public class GameManager : MonoBehaviour
     public int BarracksLevel { get; set; }
     public int WallLevel { get; set; }
     public int WatchtowerLevel { get; set; }
+    public int WoodCount { get; set; }
+    public int StoneCount { get; set; }
+    public int GoldCount { get; set; }
 
     void Awake()
     {
