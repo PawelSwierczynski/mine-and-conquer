@@ -20,4 +20,19 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Lumberjack.unity
     guid: 8e4c8f51632e37c448729af980e0fe91
+  - enabled: 1
+    path: Assets/Scenes/Stonequarry.unity
+    guid: 2985f7f16c0ccd540a5c3955542f0588
+  - enabled: 1
+    path: Assets/Scenes/Goldmine.unity
+    guid: 49f11933e0af4c344abb3b9f9a09f857
+  - enabled: 1
+    path: Assets/Scenes/Barracks.unity
+    guid: 5b38e0ee4f2ebc3458fa3390d062799a
+  - enabled: 1
+    path: Assets/Scenes/Wall.unity
+    guid: 540667b70ef0dd04b936655a0ea3d770
+  - enabled: 1
+    path: Assets/Scenes/Watchtower.unity
+    guid: 822e98318977ede4fb55ffd2f80e878f
   m_configObjects: {}

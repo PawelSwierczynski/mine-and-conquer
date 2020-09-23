@@ -21,9 +21,15 @@ public class Buildings : MonoBehaviour
     public Button LumberjackButton;    
     public Button StonequarryButton;
     public Button GoldmineButton;
+    public Button BarracksButton;
+    public Button WallButton;
+    public Button WatchtowerButton;
     public Text LumberjackLevel;
     public Text StonequarryLevel;
     public Text GoldmineLevel;
+    public Text BarracksLevel;
+    public Text WallLevel;
+    public Text WatchtowerLevel;
 
 
     void Start()
@@ -55,11 +61,17 @@ public class Buildings : MonoBehaviour
                 LumberjackLevel.text = village.Lumberjack.ToString();
                 StonequarryLevel.text = village.Stonequarry.ToString();
                 GoldmineLevel.text = village.Goldmine.ToString();
+                BarracksLevel.text = village.Barracks.ToString();
+                WallLevel.text = village.Wall.ToString();
+                WatchtowerLevel.text = village.Watchtower.ToString();
                 GameManager.Instance.LumberjackLevel = village.Lumberjack;
                 GameManager.Instance.StonequarryLevel = village.Stonequarry;
                 GameManager.Instance.GoldmineLevel = village.Goldmine;
+                GameManager.Instance.BarracksLevel = village.Barracks;
+                GameManager.Instance.WallLevel = village.Wall;
+                GameManager.Instance.WatchtowerLevel = village.Watchtower;
 
-}
+            }
         }
     }
 
@@ -82,10 +94,22 @@ public class Buildings : MonoBehaviour
     }
     public void Stonequarry()
     {
-        //SceneManager.LoadScene("Stonequarry");
+        SceneManager.LoadScene("Stonequarry");
     }
     public void Goldmine()
     {
-        //SceneManager.LoadScene("Goldmine");
+        SceneManager.LoadScene("Goldmine");
+    }
+    public void Barracks()
+    {
+        SceneManager.LoadScene("Barracks");
+    }
+    public void Wall()
+    {
+        SceneManager.LoadScene("Wall");
+    }
+    public void Watchtower()
+    {
+        SceneManager.LoadScene("Watchtower");
     }
 }
