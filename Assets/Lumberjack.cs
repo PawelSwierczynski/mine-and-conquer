@@ -16,11 +16,13 @@ public class Lumberjack : MonoBehaviour
     public Text RequiredWood;
     public Text RequiredStone;
     public Text RequiredGold;
-    // Start is called before the first frame update
+    private ResourceCountUpdater resourceCountUpdater;
+
     void Start()
     {
         UpgradeButton.onClick.AddListener(Upgrade);
-        BackButton.onClick.AddListener(BackRequest);       
+        BackButton.onClick.AddListener(BackRequest);
+        resourceCountUpdater = FindObjectOfType<ResourceCountUpdater>();
         SetLevels();
     }
 
@@ -70,7 +72,7 @@ public class Lumberjack : MonoBehaviour
             }
             else
             {
-                GameManager.Instance.UpdateResources(www.downloadHandler.text);
+                resourceCountUpdater.UpdateCounts(www.downloadHandler.text);
                 GameManager.Instance.LumberjackLevel += 1;
                 SetLevels();
             }
