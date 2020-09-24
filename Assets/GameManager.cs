@@ -26,4 +26,13 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    public void UpdateResources(string resourceCountsJson)
+    {
+        ResourceCounts resourceCounts = JsonUtility.FromJson<ResourceCounts>(resourceCountsJson.Substring(1, resourceCountsJson.Length - 2));
+
+        WoodCount = resourceCounts.WoodCount;
+        StoneCount = resourceCounts.StoneCount;
+        GoldCount = resourceCounts.GoldCount;
+    }
 }

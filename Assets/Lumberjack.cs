@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -17,13 +16,11 @@ public class Lumberjack : MonoBehaviour
     public Text RequiredWood;
     public Text RequiredStone;
     public Text RequiredGold;
-    private ResourceCountUpdater resourceCountUpdater;
     // Start is called before the first frame update
     void Start()
     {
         UpgradeButton.onClick.AddListener(Upgrade);
-        BackButton.onClick.AddListener(BackRequest);
-        resourceCountUpdater = FindObjectOfType<ResourceCountUpdater>();        
+        BackButton.onClick.AddListener(BackRequest);       
         SetLevels();
     }
 
@@ -73,20 +70,23 @@ public class Lumberjack : MonoBehaviour
             }
             else
             {
-                resourceCountUpdater.UpdateCounts(www.downloadHandler.text);
+                GameManager.Instance.UpdateResources(www.downloadHandler.text);
                 GameManager.Instance.LumberjackLevel += 1;
                 SetLevels();
             }
         }
     }
+
     public void BackRequest()
     {
         SceneManager.LoadScene("Village");
     }
+
     public void Upgrade()
     {
         StartCoroutine(UpgradeRequest());
     }
+
     public void SetLevels()
     {
         CurrentLevel.text = GameManager.Instance.LumberjackLevel.ToString();
@@ -97,5 +97,4 @@ public class Lumberjack : MonoBehaviour
         RequiredStone.text = (GameManager.Instance.LumberjackLevel * 5).ToString();
         RequiredGold.text = Math.Ceiling(GameManager.Instance.LumberjackLevel * 2.5).ToString();
     }
-
 }
