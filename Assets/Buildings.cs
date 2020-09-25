@@ -38,6 +38,9 @@ public class Buildings : MonoBehaviour
         LumberjackButton.onClick.AddListener(Lumberjack);
         StonequarryButton.onClick.AddListener(Stonequarry);
         GoldmineButton.onClick.AddListener(Goldmine);
+        BarracksButton.onClick.AddListener(Barracks);
+        WallButton.onClick.AddListener(Wall);
+        WatchtowerButton.onClick.AddListener(Watchtower);
         VillageRequest();
         
     }

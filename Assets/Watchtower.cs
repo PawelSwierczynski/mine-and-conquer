@@ -17,18 +17,13 @@ public class Watchtower : MonoBehaviour
     public Text RequiredWood;
     public Text RequiredStone;
     public Text RequiredGold;
-    // Start is called before the first frame update
+    private ResourceCountUpdater resourceCountUpdater;
     void Start()
     {
+        resourceCountUpdater = FindObjectOfType<ResourceCountUpdater>();
         UpgradeButton.onClick.AddListener(Upgrade);
         BackButton.onClick.AddListener(BackRequest);
         SetLevels();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     IEnumerator UpgradeRequest()
@@ -48,11 +43,32 @@ public class Watchtower : MonoBehaviour
             }
             else
             {
-                Debug.Log("ok");
+                StartCoroutine(UpdateResources());
             }
         }
-        GameManager.Instance.WatchtowerLevel += 1;
-        SetLevels();
+    }
+    IEnumerator UpdateResources()
+    {
+        WWWForm form2 = new WWWForm();
+        form2.AddField("woodUsed", int.Parse(RequiredWood.text));
+        form2.AddField("stoneUsed", int.Parse(RequiredStone.text));
+        form2.AddField("goldUsed", int.Parse(RequiredGold.text));
+        form2.AddField("userToken", GameManager.Instance.Token);
+        using (UnityWebRequest www = UnityWebRequest.Post("https://rest-api-nodejs-mysql-server.herokuapp.com/api/UserResources/use", form2))
+        {
+            yield return www.SendWebRequest();
+
+            if (www.isNetworkError || www.isHttpError)
+            {
+                Debug.Log(www.error);
+            }
+            else
+            {
+                resourceCountUpdater.UpdateCounts(www.downloadHandler.text);
+                GameManager.Instance.WatchtowerLevel += 1;
+                SetLevels();
+            }
+        }
     }
     public void BackRequest()
     {
