@@ -44,6 +44,29 @@ namespace Assets.Location
             {
                 UpdateLocationIfNecessary();
             }
+            else
+            {
+                if (Input.GetKeyUp(KeyCode.W)) {
+                    Latitude += LOCATION_CHANGE_THRESHOLD;
+                    isLocationChanged = true;
+                }
+                else if (Input.GetKeyUp(KeyCode.S))
+                {
+                    Latitude -= LOCATION_CHANGE_THRESHOLD;
+                    isLocationChanged = true;
+                }
+
+                if (Input.GetKeyUp(KeyCode.A))
+                {
+                    Longitude -= LOCATION_CHANGE_THRESHOLD;
+                    isLocationChanged = true;
+                }
+                else if (Input.GetKeyUp(KeyCode.D))
+                {
+                    Longitude += LOCATION_CHANGE_THRESHOLD;
+                    isLocationChanged = true;
+                }
+            }
         }
 
         private IEnumerator EnableLocationRetrieval()
