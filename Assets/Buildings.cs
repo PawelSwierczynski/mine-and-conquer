@@ -89,6 +89,8 @@ public class Buildings : MonoBehaviour
     }
     public void OpenMap()
     {
+        GameManager.Instance.PlaySound(3);
+
         SceneManager.LoadScene("Game");
     }
     public void Lumberjack()

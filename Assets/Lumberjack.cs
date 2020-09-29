@@ -74,6 +74,8 @@ public class Lumberjack : MonoBehaviour
             {
                 resourceCountUpdater.UpdateCounts(www.downloadHandler.text);
                 GameManager.Instance.LumberjackLevel += 1;
+                GameManager.Instance.PlaySound(5);
+
                 SetLevels();
             }
         }

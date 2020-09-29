@@ -68,6 +68,8 @@ public class Goldmine : MonoBehaviour
             {
                 resourceCountUpdater.UpdateCounts(www.downloadHandler.text);
                 GameManager.Instance.GoldmineLevel += 1;
+                GameManager.Instance.PlaySound(5);
+
                 SetLevels();
             }
         }

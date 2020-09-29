@@ -70,6 +70,8 @@ public class Stonequarry : MonoBehaviour
             {
                 resourceCountUpdater.UpdateCounts(www.downloadHandler.text);
                 GameManager.Instance.StonequarryLevel += 1;
+                GameManager.Instance.PlaySound(5);
+
                 SetLevels();
             }
         }

@@ -13,6 +13,8 @@ public class VillageButton : MonoBehaviour
     }
     public void OpenVillage()
     {
+        GameManager.Instance.PlaySound(4);
+
         SceneManager.LoadScene("Village");
     }
 }

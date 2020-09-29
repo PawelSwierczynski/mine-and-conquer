@@ -33,6 +33,8 @@ namespace Assets.UI
                 {
                     resourceCountUpdater.UpdateCounts(unityWebRequest.downloadHandler.text);
 
+                    GameManager.Instance.PlaySound(ResourceType - 1);
+
                     Destroy(transform.gameObject);
                 }
             }

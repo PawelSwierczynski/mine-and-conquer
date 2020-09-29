@@ -14,6 +14,8 @@ public class GameManager : MonoBehaviour
     public int WoodCount { get; set; }
     public int StoneCount { get; set; }
     public int GoldCount { get; set; }
+    public AudioSource audioSource;
+    public AudioClip[] audioClips;
 
     void Awake()
     {
@@ -35,5 +37,10 @@ public class GameManager : MonoBehaviour
         WoodCount = resourceCounts.WoodCount;
         StoneCount = resourceCounts.StoneCount;
         GoldCount = resourceCounts.GoldCount;
+    }
+
+    public void PlaySound(int soundIdentifier)
+    {
+        audioSource.PlayOneShot(audioClips[soundIdentifier], 0.5f);
     }
 }
