@@ -31,19 +31,21 @@ public class Wall : MonoBehaviour
         WWWForm form = new WWWForm();
         form.AddField("Token", GameManager.Instance.Token);
         form.AddField("Level", GameManager.Instance.WallLevel + 1);
-        
 
-        using (UnityWebRequest www = UnityWebRequest.Post("https://rest-api-nodejs-mysql-server.herokuapp.com/Villages/Wall", form))
+        if (GameManager.Instance.WoodCount >= int.Parse(RequiredWood.text) && GameManager.Instance.StoneCount >= int.Parse(RequiredStone.text) && GameManager.Instance.GoldCount >= int.Parse(RequiredGold.text))
         {
-            yield return www.SendWebRequest();
+            using (UnityWebRequest www = UnityWebRequest.Post("https://rest-api-nodejs-mysql-server.herokuapp.com/Villages/Wall", form))
+            {
+                yield return www.SendWebRequest();
 
-            if (www.isNetworkError || www.isHttpError)
-            {
-                Debug.Log(www.error);
-            }
-            else
-            {
-                StartCoroutine(UpdateResources());
+                if (www.isNetworkError || www.isHttpError)
+                {
+                    Debug.Log(www.error);
+                }
+                else
+                {
+                    StartCoroutine(UpdateResources());
+                }
             }
         }
     }
