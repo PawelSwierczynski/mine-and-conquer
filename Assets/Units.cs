@@ -6,15 +6,17 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.Networking;
 
-public class Barracks : MonoBehaviour
+
+[Serializable]
+public class Unit
 {
-    public Button UpgradeButton;
+    public int Swordsman;
+}
+public class Units : MonoBehaviour
+{
+    public Button RecruitButton;
     public Button BackButton;
-    public Button UnitsButton;
-    public Text CurrentLevel;
-    public Text CurrentProduction;
-    public Text NextLevel;
-    public Text NextProduction;
+    public Text Swordsmans;
     public Text RequiredWood;
     public Text RequiredStone;
     public Text RequiredGold;
@@ -22,20 +24,19 @@ public class Barracks : MonoBehaviour
     void Start()
     {
         resourceCountUpdater = FindObjectOfType<ResourceCountUpdater>();
-        UpgradeButton.onClick.AddListener(Upgrade);
+        RecruitButton.onClick.AddListener(Recruit);
         BackButton.onClick.AddListener(BackRequest);
-        UnitsButton.onClick.AddListener(UnitsRequest);
-        SetLevels();
+        StartCoroutine(UnitsRequest());
     }
 
-    IEnumerator UpgradeRequest()
+    IEnumerator RecruitRequest()
     {
         WWWForm form = new WWWForm();
         form.AddField("Token", GameManager.Instance.Token);
-        form.AddField("Level", GameManager.Instance.BarracksLevel + 1);
-        
+        form.AddField("Level", GameManager.Instance.Swordsmans + 1);
 
-        using (UnityWebRequest www = UnityWebRequest.Post("https://rest-api-nodejs-mysql-server.herokuapp.com/Villages/Barracks", form))
+
+        using (UnityWebRequest www = UnityWebRequest.Post("https://rest-api-nodejs-mysql-server.herokuapp.com/Units/Swordsman", form))
         {
             yield return www.SendWebRequest();
 
@@ -67,32 +68,44 @@ public class Barracks : MonoBehaviour
             else
             {
                 resourceCountUpdater.UpdateCounts(www.downloadHandler.text);
-                GameManager.Instance.BarracksLevel += 1;
+                GameManager.Instance.Swordsmans += 1;
                 SetLevels();
             }
         }
     }
     public void BackRequest()
     {
-        SceneManager.LoadScene("Village");
-    }
-    public void UnitsRequest()
-    {
-        SceneManager.LoadScene("Units");
-    }
-    public void Upgrade()
-    {
-        StartCoroutine(UpgradeRequest());
-    }
-    public void SetLevels()
-    {
-        CurrentLevel.text = GameManager.Instance.BarracksLevel.ToString();
-        CurrentProduction.text = "+" + (GameManager.Instance.BarracksLevel*10).ToString() + "%";
-        NextLevel.text = (GameManager.Instance.BarracksLevel + 1).ToString();
-        NextProduction.text = "+" + ((GameManager.Instance.BarracksLevel + 1) * 10).ToString() + "%";
-        RequiredWood.text = (GameManager.Instance.BarracksLevel * 10).ToString();
-        RequiredStone.text = (GameManager.Instance.BarracksLevel * 5).ToString();
-        RequiredGold.text = Math.Ceiling(GameManager.Instance.BarracksLevel * 2.5).ToString();
+        SceneManager.LoadScene("Barracks");
     }
 
+    public void Recruit()
+    {
+        StartCoroutine(RecruitRequest());
+    }
+    public void SetLevels()
+    {        
+        Swordsmans.text = GameManager.Instance.Swordsmans.ToString();
+    }
+    IEnumerator UnitsRequest()
+    {
+        WWWForm form = new WWWForm();
+        form.AddField("Token", GameManager.Instance.Token);
+        using (UnityWebRequest www = UnityWebRequest.Post("https://rest-api-nodejs-mysql-server.herokuapp.com/Units", form))
+        {
+            yield return www.SendWebRequest();
+
+            if (www.isNetworkError || www.isHttpError)
+            {
+                Debug.Log(www.error);
+            }
+            else
+            {
+                Unit unit = JsonUtility.FromJson<Unit>(www.downloadHandler.text.Trim(new char[] { '[', ']' }));
+                Swordsmans.text = unit.Swordsman.ToString();
+                GameManager.Instance.Swordsmans = unit.Swordsman;
+
+            }
+        }
+    }
 }
+
